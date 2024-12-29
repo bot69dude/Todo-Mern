@@ -19,7 +19,6 @@ app.use(cors({
   credentials: true,  // Allow credentials
 }));
 app.use(express.json());
-const __dirname = path.resolve();
 
 // Routes
 app.use('/api/auth', authRoutes);
