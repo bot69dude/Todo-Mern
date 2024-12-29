@@ -14,8 +14,8 @@ connectDB();
 // Middleware
 app.use(cookieParser());
 app.use(cors({
-  origin: ["http://localhost:5173"], // Allowed origins
-  credentials: true,                // Allow credentials
+  origin: ["http://localhost:5173", "http://localhost:4173"], // Add the new URL
+  credentials: true,  // Allow credentials
 }));
 app.use(express.json());
 
