@@ -5,6 +5,7 @@ const dotenv =  require('dotenv');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const todoRoutes = require('./routes/todoRoutes');
+const path = require('path');
 
 const app = express();
 dotenv.config();
@@ -18,10 +19,19 @@ app.use(cors({
   credentials: true,  // Allow credentials
 }));
 app.use(express.json());
+const __dirname = path.resolve();
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/todos', todoRoutes);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 // Error handling middleware
 app.use((err, req, res, next) => {
