@@ -1,4 +1,3 @@
-// src/App.tsx
 import { useState } from 'react';
 import { Login } from './components/User/Login';
 import { Register } from './components/User/Register';
@@ -16,9 +15,9 @@ export const App = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+      <div className="min-h-screen bg-gradient-to-br from-blue-200 to-blue-600 py-6 flex flex-col justify-center sm:py-12">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+          <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow-xl rounded-3xl sm:p-10">
             {showRegister ? (
               <div>
                 <Register onRegister={() => setIsAuthenticated(true)} />
@@ -48,12 +47,12 @@ export const App = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 py-6">
-      <div className="max-w-2xl mx-auto px-4">
+      <div className="max-w-4xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Todo List</h1>
+          <h1 className="text-3xl font-bold text-gray-800">Todo List</h1>
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none"
           >
             Logout
           </button>

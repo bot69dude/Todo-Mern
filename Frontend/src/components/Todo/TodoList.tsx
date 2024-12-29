@@ -3,8 +3,8 @@ import { Todo } from '../../types';
 import { todoService } from '../../services/todoService';
 import { TodoItem } from './TodoItem';
 import { TodoForm } from './TodoForm';
-import { AlertCircle, Loader2 } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2 } from 'lucide-react';
+import { Alert } from '../ui/alert';
 
 export const TodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -27,6 +27,11 @@ export const TodoList = () => {
     fetchTodos();
   }, []);
 
+  const handleAlertConfirm = () => {
+    setError('');
+    fetchTodos();
+  };
+
   return (
     <div className="mx-auto max-w-2xl space-y-6 p-4">
       <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
@@ -35,10 +40,11 @@ export const TodoList = () => {
         <TodoForm onTodoCreated={fetchTodos} />
 
         {error && (
-          <Alert variant="destructive" className="mt-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
+          <Alert
+            title="Error Loading Tasks"
+            description={error}
+            onConfirm={handleAlertConfirm}
+          />
         )}
 
         <div className="mt-8">
