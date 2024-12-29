@@ -33,12 +33,14 @@ export const TodoList = () => {
   };
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6 p-4">
-      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <h1 className="mb-6 text-2xl font-bold text-gray-900">My Tasks</h1>
-        
+    <div className="bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 min-h-screen flex flex-col items-center py-10">
+      <div className="w-full max-w-3xl p-8 bg-white rounded-xl shadow-lg">
+        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-8">My Tasks</h1>
+
+        {/* Todo Form Section */}
         <TodoForm onTodoCreated={fetchTodos} />
 
+        {/* Error Alert */}
         {error && (
           <Alert
             title="Error Loading Tasks"
@@ -47,22 +49,21 @@ export const TodoList = () => {
           />
         )}
 
+        {/* Main Todo List Section */}
         <div className="mt-8">
           {isLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+            <div className="flex justify-center py-8">
+              <Loader2 className="h-10 w-10 text-indigo-600 animate-spin" />
             </div>
           ) : todos.length === 0 ? (
-            <div className="rounded-lg border-2 border-dashed border-gray-200 p-8">
+            <div className="rounded-lg border-2 border-dashed border-gray-300 p-8 bg-gray-50">
               <div className="text-center">
                 <h3 className="text-lg font-medium text-gray-900">No tasks yet</h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  Get started by creating a new task above
-                </p>
+                <p className="mt-1 text-sm text-gray-500">Get started by creating a new task above</p>
               </div>
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-6">
               {todos.map((todo) => (
                 <TodoItem
                   key={todo._id}
@@ -71,9 +72,9 @@ export const TodoList = () => {
                   onTodoDeleted={fetchTodos}
                 />
               ))}
-              <div className="mt-4 text-sm text-gray-500">
+              <div className="mt-4 text-sm text-gray-500 text-center">
                 {`${todos.length} ${todos.length === 1 ? 'task' : 'tasks'}`} •{' '}
-                {todos.filter(t => t.completed).length} completed
+                {todos.filter((t) => t.completed).length} completed
               </div>
             </div>
           )}
