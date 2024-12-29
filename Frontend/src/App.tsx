@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import { useState } from 'react';
+import { Login } from './components/User/Login';
+import { Register } from './components/User/Register';
+import { TodoList } from './components/Todo/TodoList';
+import { userService } from './services/userService';
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+
+  const handleLogout = async () => {
+    await userService.logout();
+    setIsAuthenticated(false);
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+            {showRegister ? (
+              <div>
+                <Register onRegister={() => setIsAuthenticated(true)} />
+                <button
+                  onClick={() => setShowRegister(false)}
+                  className="mt-4 text-blue-500 hover:text-blue-700"
+                >
+                  Already have an account? Login
+                </button>
+              </div>
+            ) : (
+              <div>
+                <Login onLogin={() => setIsAuthenticated(true)} />
+                <button
+                  onClick={() => setShowRegister(true)}
+                  className="mt-4 text-blue-500 hover:text-blue-700"
+                >
+                  Don't have an account? Register
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-gray-100 py-6">
+      <div className="max-w-2xl mx-auto px-4">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Todo List</h1>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </div>
+        <TodoList />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;
