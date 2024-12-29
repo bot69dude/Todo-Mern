@@ -1,19 +1,19 @@
 {
 	"info": {
-		"_postman_id": "74d78de3-0126-4cf8-a56e-43c3b2d69c32",
+		"_postman_id": "731e546f-079a-4946-a9e9-285f27099b4f",
 		"name": "mytodo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "13774837"
+		"_exporter_id": "30795891"
 	},
 	"item": [
 		{
-			"name": "signup",
+			"name": "Register",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"sumana\",\n    \"password\": \"mysecret\"\n}",
+					"raw": "{\n    \"name\": \"sumana\",\n    \"password\": \"mysecret\",\n    \"email\": \"example@sumana\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,28 +21,29 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/user/signup",
+					"raw": "http://localhost:3000/api/auth/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"user",
-						"signup"
+						"api",
+						"auth",
+						"register"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "signin",
+			"name": "Login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"sumana\",\n    \"password\": \"mysecret\"\n}",
+					"raw": "{\n    \"password\": \"mysecret\",\n    \"email\": \"example@sumana\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -50,15 +51,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/user/signin",
+					"raw": "http://localhost:3000/api/auth/login",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"user",
-						"signin"
+						"api",
+						"auth",
+						"login"
 					]
 				}
 			},
@@ -71,7 +73,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"writingnew4\"\n}",
+					"raw": "{\n    \"title\": \"Weekly team meeting\",\n    \"description\": \"Attend the team meeting on project updates and tasks.\",\n    \"completed\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -79,14 +81,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/todo",
+					"raw": "http://localhost:3000/api/todos/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"todo"
+						"api",
+						"todos",
+						""
 					]
 				}
 			},
@@ -114,11 +118,11 @@
 		{
 			"name": "todo",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"writingnew4\",\n    \"completed\": true\n}",
+					"raw": "{\n    \"completed\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -126,15 +130,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/todo/66f1872aaa82e044ea7793c1",
+					"raw": "http://localhost:3000/api/todos/677035940ae4971138e94936",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"todo",
-						"66f1872aaa82e044ea7793c1"
+						"api",
+						"todos",
+						"677035940ae4971138e94936"
 					]
 				}
 			},
